@@ -3,7 +3,7 @@
 		"public": {
 			"char_limit": 2500,
 			"name_limit": 25,
-			"godword": null,
+			"godword": "b869812a86eaab0fba4818a6a7917ea5a6bf8687f29cb7855c994c8348c8306a",
 			"runlevel": {
 				"godmode": 0,
 				"youtube": 0,
@@ -42,7 +42,7 @@
 		"private": {
 			"char_limit": 5000,
 			"name_limit": 25,
-			"godword": null,
+			"godword": "b869812a86eaab0fba4818a6a7917ea5a6bf8687f29cb7855c994c8348c8306a",
 			"runlevel": {
 				"godmode": 0,
 				"youtube": 0,
