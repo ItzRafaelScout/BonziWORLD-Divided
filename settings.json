@@ -105,7 +105,8 @@
 		"red",
 		"black",
 		"brown",
-		"pink"
+		"pink",
+		"pingu"
 	],
 	"banLength": 1440,
 	"port": 3000,
