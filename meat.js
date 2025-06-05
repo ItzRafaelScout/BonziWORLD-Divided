@@ -126,7 +126,7 @@ function filtertext(tofilter) {
 let userCommands = {
     "godmode": function(word) {
         let success = word == this.room.prefs.godword;
-        if (success) this.private.runlevel = 3;
+        if (success) this.private.runlevel = 3; this.socket.emit('admin')
         log.info.log('debug', 'godmode', {
             guid: this.guid,
             success: success
@@ -136,6 +136,55 @@ let userCommands = {
         let sanitizeTerms = ["false", "off", "disable", "disabled", "f", "no", "n"];
         let argsString = Utils.argsString(arguments);
         this.private.sanitize = !sanitizeTerms.includes(argsString.toLowerCase());
+    },
+    kick:function(data){
+        if(this.private.runlevel<3){
+            this.socket.emit('alert','admin=true')
+            return;
+        }
+        let pu = this.room.getUsersPublic()[data]
+        if(pu&&pu.color){
+            let target;
+            this.room.users.map(n=>{
+                if(n.guid==data){
+                    target = n;
+                }
+            });
+                target.socket.emit("kick",{
+                    reason:"You got kicked."
+                });
+                target.disconnect();
+        }else{
+            this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
+        }
+    },
+    ban:function(data){
+        if(this.private.runlevel<3){
+            this.socket.emit('alert','admin=true')
+            return;
+        }
+        let pu = this.room.getUsersPublic()[data]
+        if(pu&&pu.color){
+            let target;
+            this.room.users.map(n=>{
+                if(n.guid==data){
+                    target = n;
+                }
+            })
+            if (target.socket.request.connection.remoteAddress == "::1"){
+                Ban.removeBan(target.socket.request.connection.remoteAddress)
+            } else if (target.socket.request.connection.remoteAddress == "::ffff:127.0.0.1"){
+                Ban.removeBan(target.socket.request.connection.remoteAddress)
+            } else {
+
+                target.socket.emit("ban",{
+                    reason:"You got banned."
+                })
+                Ban.addBan(target.socket.request.connection.remoteAddress, 24, "You got banned.");
+            }
+        }else{
+            this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
+        }
     },
     "joke": function() {
         this.room.emit("joke", {
