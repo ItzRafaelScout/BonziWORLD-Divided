@@ -8,6 +8,8 @@ const sanitize = require('sanitize-html');
 let roomsPublic = [];
 let rooms = {};
 let usersAll = [];
+let blacklist = [".onion", "replit.dev", "onrender.com"];
+
 
 exports.beat = function() {
     io.on('connection', function(socket) {
@@ -111,6 +113,14 @@ function newRoom(rid, prefs) {
     log.info.log('debug', 'newRoom', {
         rid: rid
     });
+}
+
+function filtertext(tofilter) {
+  let filtered = false;
+  blacklist.forEach(listitem => {
+    if(tofilter.includes(listitem)) filtered = true;
+  });
+  return filtered;
 }
 
 let userCommands = {
@@ -393,11 +403,13 @@ class User {
     }
 
     talk(data) {
-        if (typeof data != 'object') { // Crash fix (issue #9)
+        if (typeof data != 'object' || filtertext(data.text) && this.private.sanitize) { // Crash fix (issue #9) and also using detects blacklisted words.
             data = {
                 text: "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE SERVER LMAO"
             };
         }
+
+	
 
         log.info.log('debug', 'talk', {
             guid: this.guid,
