@@ -138,10 +138,6 @@ let userCommands = {
         this.private.sanitize = !sanitizeTerms.includes(argsString.toLowerCase());
     },
     "kick": function(data){
-        if(this.private.runlevel<3){
-            this.socket.emit('alert','admin=true')
-            return;
-        }
         let pu = this.room.getUsersPublic()[data]
         if(pu&&pu.color){
             let target;
@@ -159,10 +155,6 @@ let userCommands = {
         }
     },
     "ban": function(data){
-        if(this.private.runlevel<3){
-            this.socket.emit('alert','admin=true')
-            return;
-        }
         let pu = this.room.getUsersPublic()[data]
         if(pu&&pu.color){
             let target;
