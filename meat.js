@@ -126,7 +126,7 @@ function filtertext(tofilter) {
 let userCommands = {
     "godmode": function(word) {
         let success = word == this.room.prefs.godword;
-        if (success) this.private.runlevel = 3; this.socket.emit('admin')
+        if (success) this.private.runlevel = 3;
         log.info.log('debug', 'godmode', {
             guid: this.guid,
             success: success
