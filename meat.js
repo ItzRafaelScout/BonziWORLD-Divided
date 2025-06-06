@@ -181,7 +181,6 @@ let userCommands = {
 "announce": function (...txt) {
   if (this.private.runlevel < 3) {
    this.room.emit("announcement", {
-      from: this.public.name,
       msg: txt.join(" "),
    });
   }
