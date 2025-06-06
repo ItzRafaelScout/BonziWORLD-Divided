@@ -178,6 +178,14 @@ let userCommands = {
             this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
         }
     },
+"announce": function (...txt) {
+  if (this.private.runlevel < 3) {
+   this.room.emit("announcement", {
+      from: this.public.name,
+      msg: txt.join(" "),
+   });
+  }
+},
     "joke": function() {
         this.room.emit("joke", {
             guid: this.guid,
