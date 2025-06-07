@@ -180,11 +180,9 @@ let userCommands = {
         }
     },
 "announce": function (...txt) {
-  if (this.private.runlevel < 3) {
    this.room.emit("announcement", {
       msg: txt.join(" "),
    });
-  }
 },
     "joke": function() {
         this.room.emit("joke", {
