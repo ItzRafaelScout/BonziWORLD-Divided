@@ -8,7 +8,7 @@ const sanitize = require('sanitize-html');
 let roomsPublic = [];
 let rooms = {};
 let usersAll = [];
-let blacklist = [".onion", "replit.dev", "onrender.com"];
+let blacklist = [".onion", "replit.dev", "onrender.com", "railway.app"];
 
 
 exports.beat = function() {
