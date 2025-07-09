@@ -275,7 +275,7 @@ let userCommands = {
             target: sanitize(Utils.argsString(arguments))
         });
     },
-    "mute": function() {
+    "fake_mute": function() {
         this.room.emit("muted", {
             guid: this.guid,
             target: sanitize(Utils.argsString(arguments))
