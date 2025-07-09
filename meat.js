@@ -263,6 +263,24 @@ let userCommands = {
             target: sanitize(Utils.argsString(arguments))
         });
     },
+    "shit": function() {
+        this.room.emit("shit", {
+            guid: this.guid,
+            target: sanitize(Utils.argsString(arguments))
+        });
+    },
+    "getout": function() {
+        this.room.emit("getout", {
+            guid: this.guid,
+            target: sanitize(Utils.argsString(arguments))
+        });
+    },
+    "mute": function() {
+        this.room.emit("muted", {
+            guid: this.guid,
+            target: sanitize(Utils.argsString(arguments))
+        });
+    },
     "triggered": "passthrough",
     "vaporwave": function() {
         this.socket.emit("vaporwave");
