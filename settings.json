@@ -127,7 +127,8 @@
                 "grey",
                 "gunmetal",
                 "vantablack",
-		"pingu"
+		"pingu",
+                "mametchi"
 	],
 	"banLength": 1440,
 	"port": 3000,
